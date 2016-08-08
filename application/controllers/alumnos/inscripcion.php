@@ -14,6 +14,9 @@ class Inscripcion extends CI_Controller {
         $this->load->model('usuarios_model');
         $this->load->model('taller_semestre_horario_model');
         $this->load->model('talleres_model');
+        $this->load->model('datos_alumnos_ex_model');
+        $this->load->model('datos_externo_model');
+        $this->load->model('datos_trabajador_model');
         $this->load->library('archivos');
     }
 
@@ -36,7 +39,7 @@ class Inscripcion extends CI_Controller {
             //$this->load->model('baucher_model');
             $this->load->model('baucher_talleres_model');
             foreach ($data['talleres'] as $key => $taller) {
-                $this->check_status_taller($taller['id']);
+                //$this->check_status_taller($taller['id']);
                 $count = $this->baucher_talleres_model->count_insc($taller['id']);
                 $data['talleres'][$key]['insc_count'] = $count;
                 $data['talleres'][$key]['percent'] = ($count * 100) / $taller['cupo'];
@@ -97,7 +100,7 @@ class Inscripcion extends CI_Controller {
                 $this->load->model('baucher_talleres_model');
                 $piano_insc = 0;
                 foreach ($ids as $id) {
-                    $this->check_status_taller($id);
+                    //$this->check_status_taller($id);
                     $status = $this->baucher_model->get_status_by_user($id);
                     $taller = $this->talleres_semestre_model->get_with_name($id);
                     if (is_array($taller)) {
@@ -187,7 +190,7 @@ class Inscripcion extends CI_Controller {
         }
     }
 
-    public function check_status_taller($id_taller) {
+    /*public function check_status_taller($id_taller) {
         $bauchers = $this->baucher_model->get_by_taller_status($id_taller, 2 , 0);
         if (is_array($bauchers)) {
             $now = mktime();
@@ -211,12 +214,12 @@ class Inscripcion extends CI_Controller {
                 }
             }
         }
-    }
+    }*/
 
     public function get_pdf($baucher_id) {
         $this->load->model('baucher_talleres_model');
         $this->load->model('baucher_model');
-
+        
         $data['baucher'] = $this->baucher_model->get($baucher_id);
         if ($data['baucher']) {
             $this->load->helper('sesion');
@@ -242,13 +245,28 @@ class Inscripcion extends CI_Controller {
                     $date_termino_insc = mktime($termina_hora, 0, 0, $date_aux['mon'], $date_aux['mday'] + 2, $date_aux['year']);
                 }
                 $data['usuario'] = $this->usuarios_model->get(get_id());
+                switch ($data["usuario"]['tipo_usuario_id']) {
+                    case 2: case 3:
+                        $data["usuario"]["data_user"] = $this->datos_alumnos_ex_model->get_by_user_id($data["usuario"]['id']);
+                        break;
+                    case 4:
+                        $data["usuario"]["data_user"] = $this->datos_trabajador_model->get_by_user_id($data["usuario"]['id']);
+                        break;
+                    case 5:
+                        $data["usuario"]["data_user"] = $this->datos_externo_model->get_by_user_id($data["usuario"]['id']);
+                        break;
+                }
+                $d1 = new DateTime($data["usuario"]['nacimiento']);
+                $d2 = new DateTime('now');
+                $diff = $d2->diff($d1);
+                $data["usuario"]['edad'] = $diff->y;
                 $data['date_fin'] = getdate($date_termino_insc);
                 $data['termina_hora'] = $termina_hora;
                 $content = $this->load->view('alumnos/comprobante_view', $data, true);
                 $css = $this->load->view('alumnos/comprobante_css', $data, true);
                 $this->load->library('mpdf');
                 $mpdf = new mPDF();
-                $header = '<img src="images/logo_pdf.jpg" style="padding-top:25px;" />';
+                $header = '<img src="images/logo_pdf.jpg" style="margin-top:-30px;" /><img src="images/40_anios.jpg" style="margin-top:30px;float:right;" width="90px"/>';
                 $mpdf->SetProtection(array('copy' , 'print'));
                 $mpdf->SetHTMLHeader($header);
                 $mpdf->WriteHTML($css, 1);

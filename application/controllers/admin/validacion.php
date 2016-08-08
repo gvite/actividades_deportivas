@@ -51,9 +51,6 @@ class Validacion extends CI_Controller {
                 $this->load->helper('sesion');
                 $this->load->helper('date');
                 $data['talleres'] = $this->baucher_talleres_model->get_by_baucher($data['baucher']['id']);
-                foreach ($data['talleres'] as $key => $taller) {
-                    $this->check_status_taller($taller['id']);
-                }
                 $data['baucher'] = $this->baucher_model->get_by_folio($folio);
                 $data['usuario'] = $this->usuarios_model->get($data['baucher']['usuario_id']);
                 $this->load->helper(array('url', 'sesion'));
@@ -308,31 +305,6 @@ class Validacion extends CI_Controller {
             }
         }else{
             return true;
-        }
-    }
-    public function check_status_taller($id_taller) {
-        $bauchers = $this->baucher_model->get_by_taller_status($id_taller, 2 , 0);
-        if (is_array($bauchers)) {
-            $now = mktime();
-            $termina_hora = 20;
-            foreach ($bauchers as $baucher) {
-                $date_aux = getdate(strtotime($baucher['fecha_expedicion']));
-                if ($date_aux['wday'] > 3) {
-                    $date_termino_insc = mktime($termina_hora, 0, 0, $date_aux['mon'], $date_aux['mday'] + 5, $date_aux['year']);
-                } else if ($date_aux['wday'] == 0) {
-                    $date_termino_insc = mktime($termina_hora, 0, 0, $date_aux['mon'], $date_aux['mday'] + 4, $date_aux['year']);
-                } else {
-                    $date_termino_insc = mktime($termina_hora, 0, 0, $date_aux['mon'], $date_aux['mday'] + 3, $date_aux['year']);
-                }
-                $result = $now - $date_termino_insc;
-                if ($result >= 0) {
-                    if($result >= 60*60*24){
-                        $this->baucher_model->update_status($baucher['id'], 3);
-                    }else{
-                        $this->baucher_model->update_status($baucher['id'], 2);
-                    }
-                }
-            }
         }
     }
 }

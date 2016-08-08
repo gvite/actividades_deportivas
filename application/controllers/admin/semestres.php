@@ -35,6 +35,7 @@ class Semestres extends CI_Controller {
         $this->form_validation->set_rules("termino", "Fecha de Termino", "xss|required|callback_date_form");
         $this->form_validation->set_rules("termino", "Fecha de inicio de inscripcion", "xss|required");
         $this->form_validation->set_rules("termino", "Fecha de termino  de inscripcion", "xss|required");
+        $this->form_validation->set_rules("validacion", "Fecha de termino  de validación", "xss|required");
         $this->form_validation->set_message("required", "Introduce %s");
         if ($this->form_validation->run() === FALSE) {
             $errors = validation_errors();
@@ -46,11 +47,17 @@ class Semestres extends CI_Controller {
                 'ini_sem' => exchange_date($this->input->post('inicio')),
                 'fin_sem' => exchange_date($this->input->post('termino')),
                 'ini_insc' => exchange_date_time($this->input->post('ini_insc')),
-                'fin_insc' => exchange_date_time($this->input->post('fin_insc'))
+                'fin_insc' => exchange_date_time($this->input->post('fin_insc')),
+                'fin_validacion' => exchange_date_time($this->input->post('validacion'))
             );
             $this->load->model('semestres_model');
             $data['id'] = $this->semestres_model->insert($data);
             if ($data['id']) {
+                $data["ini_sem"] = exchange_date($data["ini_sem"]);
+                $data["fin_sem"] = exchange_date($data["fin_sem"]);
+                $data["ini_insc"] = exchange_date_time($data["ini_insc"]);
+                $data["fin_insc"] = exchange_date_time($data["fin_insc"]);
+                $data["fin_validacion"] = exchange_date_time($data["fin_validacion"]);
                 echo json_encode(array('status' => 'MSG', 'type' => 'success', "message" => 'Los datos se guardaron correctamente.', 'semestre' => $data, 'tipo' => 0));
             } else {
                 echo json_encode(array('status' => 'MSG', 'type' => 'warning', "message" => 'No se pudieron guardar los datos'));
@@ -64,6 +71,7 @@ class Semestres extends CI_Controller {
             $this->form_validation->set_rules("nombre", "Nombre", "xss|required");
             $this->form_validation->set_rules("inicio", "Fecha de Inicio", 'xss|required|callback_date_form');
             $this->form_validation->set_rules("termino", "Fecha de Termino", "xss|required|callback_date_form");
+            $this->form_validation->set_rules("validacion", "Fecha de termino  de validación", "xss|required");
             $this->form_validation->set_message("required", "Introduce %s");
             if ($this->form_validation->run() === FALSE) {
                 $errors = validation_errors();
@@ -75,11 +83,17 @@ class Semestres extends CI_Controller {
                     'ini_sem' => exchange_date($this->input->post('inicio')),
                     'fin_sem' => exchange_date($this->input->post('termino')),
                     'ini_insc' => exchange_date_time($this->input->post('ini_insc')),
-                    'fin_insc' => exchange_date_time($this->input->post('fin_insc'))
+                    'fin_insc' => exchange_date_time($this->input->post('fin_insc')),
+                    'fin_validacion' => exchange_date_time($this->input->post('validacion'))
                 );
                 $this->load->model('semestres_model');
                 if ($this->semestres_model->update($id, $data)) {
                     $data['id'] = $id;
+                    $data["ini_sem"] = exchange_date($data["ini_sem"]);
+                    $data["fin_sem"] = exchange_date($data["fin_sem"]);
+                    $data["ini_insc"] = exchange_date_time($data["ini_insc"]);
+                    $data["fin_insc"] = exchange_date_time($data["fin_insc"]);
+                    $data["fin_validacion"] = exchange_date_time($data["fin_validacion"]);
                     echo json_encode(array('status' => 'MSG', 'type' => 'success', "message" => 'Los datos se guardaron correctamente.', 'semestre' => $data, 'tipo' => 1));
                 } else {
                     echo json_encode(array('status' => 'MSG', 'type' => 'warning', "message" => 'No se pudieron guardar los datos'));

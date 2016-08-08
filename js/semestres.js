@@ -30,6 +30,7 @@ $(document).on('ready', function () {
                                     $(this).children('td').eq(2).text(data.semestre.fin_sem);
                                     $(this).children('td').eq(3).text(data.semestre.ini_insc);
                                     $(this).children('td').eq(4).text(data.semestre.fin_insc);
+                                    $(this).children('td').eq(5).text(data.semestre.fin_validacion);
                                 }
                             });
                         } else {
@@ -40,6 +41,7 @@ $(document).on('ready', function () {
                             html += '<td>' + data.semestre.fin_sem + '</td>';
                             html += '<td>' + data.semestre.ini_insc + '</td>';
                             html += '<td>' + data.semestre.fin_insc + '</td>';
+                            html += '<td>' + data.semestre.fin_validacion + '</td>';
                             html += '<td><button class="btn btn-sm btn-editar">Editar</button><button class="btn btn-sm btn-eliminar">Eliminar</button></td>';
                             html += '</tr>';
                             $('#semestres_table tbody').append(html);
@@ -66,6 +68,7 @@ function add_events_semestres() {
                 $('#semestre_form #termino_input').val($tr.find('td').eq(2).text());
                 $('#semestre_form #inicio_insc_input').val($tr.find('td').eq(3).text());
                 $('#semestre_form #termino_insc_input').val($tr.find('td').eq(4).text());
+                $('#semestre_form #validacion_input').val($tr.find('td').eq(5).text());
                 $('#add_semestre_modal').modal('show');
             });
             $(this).find('.btn-eliminar').on('click', function () {

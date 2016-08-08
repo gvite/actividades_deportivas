@@ -3,140 +3,95 @@ if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 ?>
 <div id="encabezado">
-    <h3>UNIVERSIDAD NACIONAL AUT&Oacute;NOMA DE M&Eacute;XICO</h3>
-    <h4>FES - ARAG&Oacute;N</h4>
-    <h5>UNIDAD DE EXTENSI&Oacute;N UNIVERSITARIA</h5>
-    <h5>DEPARTAMENTO DE ACTIVIDADES CULTURALES</h5>
+    <h3>CARRERA ATL&Eacute;TICA DE LA FES ARAG&Oacute;N 5 KM</h3>
+    <h4>Domingo 9 de octubre del 2016</h4>
+    <h3>FICHA DE INSCRIPCI&Oacute;N</h3>
+    <br /><br />
     <div>
-        <div>Folio: <?php echo str_pad($baucher['folio'], 11, "0", STR_PAD_LEFT); ?></div>
-        <div>Fecha Expedici&oacute;n: <?php echo exchange_date_time($baucher['fecha_expedicion']) ?></div>
-        <div>Alumno: <?php echo $usuario['paterno'] . ' ' . $usuario['materno'] . ' ' . $usuario['nombre'] ?></div>
-    </div>
-</div>
-<div class="footer">
-    <p>El presente pago se debe realizar a m&aacute;s tardar el <strong><?php echo $date_fin['mday'] . '/' . $date_fin['mon'] . '/' . $date_fin['year'] ?></strong>. Y debe ser presentado en <strong>Extensi&oacute;n Universitaria</strong> antes de las <?php echo $termina_hora ?>:00 hrs. <strong>para que se concluya su inscripci&oacute;n.</strong><br />
-    En caso de no presentar los requisitos en el departamento de actividades culturales en la fecha indicada el sistema cancelará automaticamente la inscripción y se tendrá que realizar nuevamente el proceso de inscripción. 
-    </p>
-    <ul>
         <?php
         switch ($usuario['tipo_usuario_id']) {
-            case 2:
+            case 2: case 3:
                 ?>
-                <li>Original y copia de credencial de alumno</li>
-                <li>Comprobante de inscripción al semestre 2016-2</li>
-                <!--<li>Historial Acad&eacute;mico</li>-->
-                <?php
-                break;
-            case 3:
-                ?>
-                <li>Original y Copia de credencial de exalumno o Identificaci&oacute;n oficial + Historial academico</li>
+                <div>COMUNIDAD UNAM</div><br />
+                <div>Nombre: <?php echo $usuario['paterno'] . ' ' . $usuario['materno'] . ' ' . $usuario['nombre'] ?></div>
+                <div>Plantel: <?php echo $usuario['data_user']['facultad']; ?></div>
+                <div>Carrera: <?php echo $usuario['data_user']['carrera']; ?></div>
+                <div>No. Cuenta: <?php echo $usuario['data_user']['no_cuenta']; ?></div>
+                <div>Tel&eacute;fono: <?php echo $usuario['telefono']; ?></div>
+                <div>Email: <?php echo $usuario['email']; ?></div>
+                <div>Categor&iacute;a: </div>
+                <div>Rama: </div>
+                <div>Folio: <?php echo str_pad($baucher['folio'], 11, "0", STR_PAD_LEFT); ?></div>
+                <div>Fecha Expedici&oacute;n: <?php echo exchange_date_time($baucher['fecha_expedicion']) ?></div>
                 <?php
                 break;
             case 4:
                 ?>
-                <li>Original y copia de credencial de trabajador</li>
+                <div>COMUNIDAD UNAM</div><br />
+                <div>Nombre: <?php echo $usuario['paterno'] . ' ' . $usuario['materno'] . ' ' . $usuario['nombre'] ?></div>
+                <div>No. Trabajador: <?php echo $usuario['data_user']['no_cuenta']; ?></div>
+                <div>Turno: <?php echo $usuario['data_user']['turno']; ?></div>
+                <div>Area: <?php echo $usuario['data_user']['area']; ?></div>
+                <div>Tel&eacute;fono: <?php echo $usuario['telefono']; ?></div>
+                <div>Email: <?php echo $usuario['email']; ?></div>
+                <div>Categor&iacute;a: </div>
+                <div>Rama: </div>
+                <div>Folio: <?php echo str_pad($baucher['folio'], 11, "0", STR_PAD_LEFT); ?></div>
+                <div>Fecha Expedici&oacute;n: <?php echo exchange_date_time($baucher['fecha_expedicion']) ?></div>
                 <?php
                 break;
             case 5:
                 ?>
-                <li>Original y copia de credencial oficial.</li>
+                <div>P&Uacute;BLICO EN GENERAL</div><br />
+                <div>Nombre: <?php echo $usuario['paterno'] . ' ' . $usuario['materno'] . ' ' . $usuario['nombre'] ?></div>
+                <div>Tel&eacute;fono: <?php echo $usuario['telefono']; ?></div>
+                <div>Email: <?php echo $usuario['email']; ?></div>
+                <div>Direcci&oacute;n: <?php echo $usuario['data_user']['direccion']; ?></div>
+                <div>Categor&iacute;a: </div>
+                <div>Rama: </div>
+                <div>Folio: <?php echo str_pad($baucher['folio'], 11, "0", STR_PAD_LEFT); ?></div>
+                <div>Fecha Expedici&oacute;n: <?php echo exchange_date_time($baucher['fecha_expedicion']) ?></div>
                 <?php
                 break;
         }
         ?>
-        <li>Presentar Original y copia de &eacute;ste voucher para validar la inscripci&oacute;n en el Departamento de Actividades Culturales</li>
-        
-        <li>Ticket de caja en original y 2 copias</li>
-        
-        <li>2 Fotos tamaño infantil en blanco y negro o a color</li>
-        <li>Copia de carnet (seguro social / seguro m&eacute;dico)</li>
+    </div>
+</div>
+<br /><br />
+<div class="responsiva">
+    <h3>CARTA RESPONSIVA</h3>
+    <p>Declaro estar sano y apto para participar en la "CARRERA ATL&Eacute;TICA DE LA FES ARAG&Oacute;N 5
+    KIL&Oacute;METROS" que se realizar&aacute; el d&iacute;a domingo 9 de octubre de 2016, reconozco los riesgos
+    inherentes a la actividad mencionada, por lo que voluntariamente y con conocimiento pleno
+    de esto, acepto y asumo la responsabilidad de mi integridad f&iacute;sica y libero de toda responsabilidad 
+    a la UNIVERSIDAD NACIONAL AUT&Oacute;NOMA DE M&Eacute;XICO y al Comit&eacute; Organizador.
+    </p>
+</div>
+<br /><br /><br /><br />
+<div class="firmas">
+        <span>&nbsp;&nbsp;&nbsp;Firma del corredor&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;
+        <?php
+        if($usuario["edad"] < 18){
+            ?>
+            &nbsp;&nbsp;&nbsp;<span>&nbsp;&nbsp;&nbsp;Firma del tutor (Menor de edad)&nbsp;&nbsp;&nbsp;</span>
+            <?php
+        }
+        ?>
+</div>
+<div class="fecha_limite">
+    <h5>* Fecha l&iacute;mite para realizar el pago: Viernes 7 de octubre de 2016.</h5>
+</div>
+<div class="paquete">
+    <h3>RECIB&Iacute; PAQUETE COMPLETO QUE INCLUYE </h3>
+    <ul>
+        <li>Payera: </li>
+        <li>N&uacute;mero: </li>
+        <li>Chip de corredor: </li>
     </ul>
 </div>
-<div>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Grupo</th>
-                <th>Actividad</th>
-                <th>Profesor</th>
-                <th>Lugar</th>
-                <th>Horario</th>
-                <th>Aportaci&oacute;n<br /> voluntaria</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-            $costo_total = 0;
-            //$has_piano = false;
-            foreach ($talleres as $taller) {
-                ?>
-                <tr>
-                    <td><?php echo $taller['grupo'] ?></td>
-                    <td><?php echo $taller['taller'] ?></td>
-                    <td><?php echo $taller['nombre'] . ' ' . $taller['paterno'] . ' ' . $taller['materno'] ?></td>
-                    <td><?php echo $taller['salon'] ?></td>
-                    <td>
-                        <?php
-                        /*if($taller['id'] == 11){
-                            $has_piano = true;
-                        }*/
-                        if (is_array($taller['horarios'])) {
-                            for ($i = 1; $i <= 5; $i++) {
-                                for ($j = 0; $j < count($taller['horarios']); $j++) {
-                                    if ($taller['horarios'][$j]['dia'] == $i) {
-                                        $dia = '';
-                                        switch ($i) {
-                                            case 1:
-                                                $dia = 'Lun';
-                                                break;
-                                            case 2:
-                                                $dia = 'Mar';
-                                                break;
-                                            case 3:
-                                                $dia = 'Mie';
-                                                break;
-                                            case 4:
-                                                $dia = 'Jue';
-                                                break;
-                                            case 5:
-                                                $dia = 'Vie';
-                                                break;
-                                        }
-                                        echo '<div>' . $dia . ' ' . substr($taller['horarios'][$j]['inicio'], 0, -3) . ' - ' . substr($taller['horarios'][$j]['termino'], 0, -3) . '</div>';
-                                    }
-                                }
-                            }
-                        } else {
-                            ?>
-                            -
-                            <?php
-                        }
-                        ?>
-                    </td>
-                    <td><?php
-                        echo '$ ' . $taller['aportacion'];
-                        $costo_total += $taller['aportacion'];
-                        ?>
-                    </td>
-                </tr>
-                <?php
-            }
-            ?>
-            <tr class="tr_total">
-                <td colspan="5" class="td_total">Total</td>
-                <td><?php echo '$ ' . $costo_total ?></td>
-            </tr>
-        </tbody>
-
-    </table>
-    <?php 
-    /*if($has_piano){
-        ?>
-        <h3>Candidatos a inscribirse al Taller de Piano:</h3>
-        <p>
-            Inmediatamente después de haber obtenido el voucher que genera el sistema, favor de presentarlo en el Departamento de Actividades Culturales, como parte indispensable de su procedimiento de inscripción. Las inscripciones que no atiendan a este requerimiento serán canceladas.
-        </p>
-        <?php
-    }*/
-    ?>
+<br />
+<div class="firmas_footer">
+    <div>Nombre: <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div>
+    <div>Fecha: <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div>
+    <div>Firma: <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div>
 </div>

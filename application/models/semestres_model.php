@@ -75,6 +75,11 @@ class Semestres_model extends CI_Model {
         $result = $this->db->get('taller_semestre');
         return ($result->num_rows() === 0) ? true : false;
     }
+    public function get_by_taller_semestre($id_taller){
+        $this->db->select("s.*");
+        $this->db->join("semestres as s" , "s.id=ts.semestre_id");
+        
+    }
 }
 
 ?>

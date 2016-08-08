@@ -35,6 +35,7 @@ if (!defined('BASEPATH'))
                                     <th>Termino</th>
                                     <th>Inicio de Inscripci&oacute;n</th>
                                     <th>Termino de Inscripci&oacute;n</th>
+                                    <th>Termino de Validación</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
@@ -49,6 +50,7 @@ if (!defined('BASEPATH'))
                                             <td><?php echo exchange_date($semestre['fin_sem']); ?></td>
                                             <td><?php echo exchange_date_time($semestre['ini_insc']); ?></td>
                                             <td><?php echo exchange_date_time($semestre['fin_insc']); ?></td>
+                                            <td><?php echo exchange_date_time($semestre['fin_validacion']); ?></td>
                                             <td><button class="btn btn-sm btn-editar">Editar</button><button class="btn btn-sm btn-eliminar">Eliminar</button></td>
                                         </tr>
                                         <?php
@@ -120,6 +122,16 @@ if (!defined('BASEPATH'))
                                     <div class="controls">
                                         <div class="input-group date fecha_time_input" id="nacimiento_user" data-date-format="DD-MM-YYYY HH:mm:ss">
                                             <input name="fin_insc" class="form-control" id="termino_insc_input" type="text" placeholder="dd-mm-yyyy hh:mm:ss" />
+                                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="validacion_input">Termino de la validación</label>
+                                    <div class="controls">
+                                        <div class="input-group date fecha_time_input" id="nacimiento_user" data-date-format="DD-MM-YYYY HH:mm:ss">
+                                            <input name="validacion" class="form-control" id="validacion_input" type="text" placeholder="dd-mm-yyyy hh:mm:ss" />
                                             <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
                                             </span>
                                         </div>

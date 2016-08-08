@@ -66,6 +66,7 @@ class Registro extends CI_Controller {
                 'pass' => $this->input->post('pass'),
                 'email' => $this->input->post('correo_user'),
                 'nacimiento' => exchange_date($this->input->post('nacimiento_user')),
+                'telefono' => $this->input->user("telefono_user"),
                 'status' => 1,
                 'tipo_usuario_id' => $tipo
             );

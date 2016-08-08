@@ -60,6 +60,12 @@ if (!defined('BASEPATH'))
                 </div>
             </div>
             <div class="control-group">
+                <label class="control-label" for="telefono_user">Teléfono</label>
+                <div class="controls">
+                    <input type="text" name="telefono_user" id="telefono_user" placeholder="telefono" class="input-xlarge form-control" />
+                </div>
+            </div>
+            <div class="control-group">
                 <label class="control-label" for="type_user">*Tipo de Usuario</label>
                 <div class="controls">
                     <select name="type_user" id="type_user" class="form-control">

@@ -21,6 +21,7 @@ class Login extends CI_Controller {
             set_type($user['tipo']);
             set_type_user($user['type_user']);
             set_id($user['id']);
+            set_date($user["nacimiento"]);
             echo json_encode(array('status' => 'OK'));
         } else {
             echo json_encode(array('status' => 'MSG', 'type' => 'warning', 'message' => 'Usuario y/o contrase&ntilde;a no v&aacute;lidos'));

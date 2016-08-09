@@ -11,6 +11,9 @@ class Inscribir extends CI_Controller {
         $this->load->model('talleres_model');
         $this->load->model('baucher_model');
         $this->load->model('usuarios_model');
+        $this->load->model('datos_alumnos_ex_model');
+        $this->load->model('datos_externo_model');
+        $this->load->model('datos_trabajador_model');
         $this->load->library('archivos');
     }
 
@@ -44,7 +47,7 @@ class Inscribir extends CI_Controller {
         
     }
     public function get_alumno($id = '') {
-        $this->load->helper(array('url', 'sesion'));
+        $this->load->helper(array('url', 'sesion','date'));
         $this->load->model('semestres_model');
         $data['semestre_actual'] = $this->semestres_model->get_actual();
         if ($data['semestre_actual']) {
@@ -75,8 +78,12 @@ class Inscribir extends CI_Controller {
                         $data['talleres'][$key]['status'] = $this->baucher_model->get_status_by_user($taller['id'], $data['alumno']['id']);
                     }
                     $data['talleres'][$key]['puede_mas'] = true;
-                    if ($taller['taller_id'] == 11 && $this->baucher_talleres_model->count_taller_insc(11, $data['semestre_actual']['id'] , $data['alumno']['id']) > 0) {
-                        $data['talleres'][$key]['puede_mas'] = false;
+
+                    
+                    if(!($taller["edad_minima"] === null || get_years_users($data['alumno']["nacimiento"]) >= $taller["edad_minima"])){
+                    $data['talleres'][$key]['puede_mas'] = 1;
+                    }else if ($this->baucher_talleres_model->count_taller_insc(11, $data['semestre_actual']['id'] , $data['alumno']['id']) > 0) {
+                        $data['talleres'][$key]['puede_mas'] = 2;
                     }
                     $data['talleres'][$key]['horarios'] = $this->taller_semestre_horario_model->get_by_taller_sem($taller['id']);
                     $data['talleres'][$key]['costo'] = '';
@@ -229,63 +236,65 @@ class Inscribir extends CI_Controller {
             $this->load->helper('sesion');
             $route = str_replace("\\", "/", FCPATH) . "uploads/comprobantes/" . $user_id . '/';
             $this->load->helper('url');
-            if (!file_exists($route . 'pdf_' . $baucher_id . '.pdf')) {
-                $this->load->helper('date');
-                $termina_hora = 20;
-                $data['talleres'] = $this->baucher_talleres_model->get_by_baucher($baucher_id);
-                if (is_array($data['talleres'])) {
-                    foreach ($data['talleres'] as $key2 => $taller_semestre) {
-                        $data['talleres'][$key2]['horarios'] = $this->taller_semestre_horario_model->get_by_taller_sem($taller_semestre['id']);
-                    }
-                }
-                $date_aux = getdate(strtotime($data['baucher']['fecha_expedicion']));
-                if ($date_aux['wday'] > 3) {
-                    $date_termino_insc = mktime($termina_hora, 0, 0, $date_aux['mon'], $date_aux['mday'] + 4, $date_aux['year']);
-                } else if ($date_aux['wday'] == 0) {
-                    $date_termino_insc = mktime($termina_hora, 0, 0, $date_aux['mon'], $date_aux['mday'] + 3, $date_aux['year']);
-                } else {
-                    $date_termino_insc = mktime($termina_hora, 0, 0, $date_aux['mon'], $date_aux['mday'] + 2, $date_aux['year']);
-                }
-                $data['usuario'] = $this->usuarios_model->get($user_id);
-                switch ($data["usuario"]['tipo_usuario_id']) {
-                    case 2: case 3:
-                        $data["usuario"]["data_user"] = $this->datos_alumnos_ex_model->get_by_user_id($data["usuario"]['id']);
-                        break;
-                    case 4:
-                        $data["usuario"]["data_user"] = $this->datos_trabajador_model->get_by_user_id($data["usuario"]['id']);
-                        break;
-                    case 5:
-                        $data["usuario"]["data_user"] = $this->datos_externo_model->get_by_user_id($data["usuario"]['id']);
-                        break;
-                }
-                $d1 = new DateTime($data["usuario"]['nacimiento']);
-                $d2 = new DateTime('now');
-                $diff = $d2->diff($d1);
-                $data["usuario"]['edad'] = $diff->y;
-                $data['date_fin'] = getdate($date_termino_insc);
-                $data['termina_hora'] = $termina_hora;
-                $content = $this->load->view('alumnos/comprobante_view', $data, true);
-                $css = $this->load->view('alumnos/comprobante_css', $data, true);
-                $this->load->library('mpdf');
-                $mpdf = new mPDF();
-                $header = '<img src="images/logo_pdf.jpg" style="margin-top:-30px;" /><img src="images/40_anios.jpg" style="margin-top:30px;float:right;" width="90px"/>';
-                $mpdf->SetProtection(array('copy' , 'print'));
-                $mpdf->SetHTMLHeader($header);
-                $mpdf->WriteHTML($css, 1);
-                $mpdf->WriteHTML($content, 2);
-
-
-                //$footer = $this->load->view('alumnos/comprobante_footer_view' , $data1 , true);
-                //$mpdf->SetHTMLFooter($footer);
-                if ($this->archivos->create_folder($route)) {
-                    $mpdf->Output($route . "pdf_" . $baucher_id . '.pdf', 'F');
-                    echo json_encode(array('status' => 'OK', 'url' => base_url() . 'uploads/comprobantes/' . $user_id . '/pdf_' . $baucher_id . '.pdf'));
-                } else {
-                    echo json_encode(array('status' => 'MSG', 'type' => 'error', "message" => 'No se pudo crear la carpeta de usuario'));
-                }
-            } else {
-                echo json_encode(array('status' => 'OK', 'url' => base_url() . 'uploads/comprobantes/' . $user_id . '/pdf_' . $baucher_id . '.pdf'));
+            if (file_exists($route . 'pdf_' . $baucher_id . '.pdf')) {
+                unlink($route . 'pdf_' . $baucher_id . '.pdf');
             }
+            $this->load->helper('date');
+            $termina_hora = 20;
+            $data['talleres'] = $this->baucher_talleres_model->get_by_baucher($baucher_id);
+            if (is_array($data['talleres'])) {
+                foreach ($data['talleres'] as $key2 => $taller_semestre) {
+                    $data['talleres'][$key2]['horarios'] = $this->taller_semestre_horario_model->get_by_taller_sem($taller_semestre['id']);
+                }
+            }
+            $date_aux = getdate(strtotime($data['baucher']['fecha_expedicion']));
+            if ($date_aux['wday'] > 3) {
+                $date_termino_insc = mktime($termina_hora, 0, 0, $date_aux['mon'], $date_aux['mday'] + 4, $date_aux['year']);
+            } else if ($date_aux['wday'] == 0) {
+                $date_termino_insc = mktime($termina_hora, 0, 0, $date_aux['mon'], $date_aux['mday'] + 3, $date_aux['year']);
+            } else {
+                $date_termino_insc = mktime($termina_hora, 0, 0, $date_aux['mon'], $date_aux['mday'] + 2, $date_aux['year']);
+            }
+            $data['usuario'] = $this->usuarios_model->get($user_id);
+            switch ($data["usuario"]['tipo_usuario_id']) {
+                case 2: case 3:
+                    $data["usuario"]["data_user"] = $this->datos_alumnos_ex_model->get_by_user_id($data["usuario"]['id']);
+                    break;
+                case 4:
+                    $data["usuario"]["data_user"] = $this->datos_trabajador_model->get_by_user_id($data["usuario"]['id']);
+                    break;
+                case 5:
+                    $data["usuario"]["data_user"] = $this->datos_externo_model->get_by_user_id($data["usuario"]['id']);
+                    break;
+            }
+            $d1 = new DateTime($data["usuario"]['nacimiento']);
+            $d2 = new DateTime('now');
+            $diff = $d2->diff($d1);
+            $data["usuario"]['edad'] = $diff->y;
+            $data['date_fin'] = getdate($date_termino_insc);
+            $data['termina_hora'] = $termina_hora;
+            $content = $this->load->view('alumnos/comprobante_view', $data, true);
+            $css = $this->load->view('alumnos/comprobante_css', $data, true);
+            $this->load->library('mpdf');
+            $mpdf = new mPDF();
+            $header = '<img src="images/logo_pdf.jpg" style="margin-top:-30px;" /><img src="images/40_anios.jpg" style="margin-top:30px;float:right;" width="90px"/>';
+            $mpdf->SetProtection(array('copy' , 'print'));
+            $mpdf->SetHTMLHeader($header);
+            $mpdf->WriteHTML($css, 1);
+            $mpdf->WriteHTML($content, 2);
+
+
+            //$footer = $this->load->view('alumnos/comprobante_footer_view' , $data1 , true);
+            //$mpdf->SetHTMLFooter($footer);
+            if ($this->archivos->create_folder($route)) {
+                $mpdf->Output($route . "pdf_" . $baucher_id . '.pdf', 'F');
+                echo json_encode(array('status' => 'OK', 'url' => base_url() . 'uploads/comprobantes/' . $user_id . '/pdf_' . $baucher_id . '.pdf'));
+            } else {
+                echo json_encode(array('status' => 'MSG', 'type' => 'error', "message" => 'No se pudo crear la carpeta de usuario'));
+            }
+            /*} else {
+                echo json_encode(array('status' => 'OK', 'url' => base_url() . 'uploads/comprobantes/' . $user_id . '/pdf_' . $baucher_id . '.pdf'));
+            }*/
         } else {
             echo json_encode(array('status' => 'MSG', 'type' => 'error', "message" => 'Se encontro una inconsistencia con el baucher solicitado.'));
         }

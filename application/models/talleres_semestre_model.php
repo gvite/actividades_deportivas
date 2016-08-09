@@ -19,7 +19,7 @@ class Talleres_semestre_model extends CI_Model {
         return ($result->num_rows() > 0) ? $result->row_array() : false;
     }
     public function get_by_semestre($id) {
-        $this->db->select('t.id as taller_id, ts.id,ts.cupo,ts.grupo , t.taller,p.nombre,p.paterno,p.materno,p.id as profesor_id,sa.salon,sa.id as salon_id,t.costo_alumno , t.costo_exalumno , t.costo_trabajador ,t.costo_externo');
+        $this->db->select('t.id as taller_id, ts.id,ts.cupo,ts.grupo , t.taller,t.edad_minima,p.nombre,p.paterno,p.materno,p.id as profesor_id,sa.salon,sa.id as salon_id,t.costo_alumno , t.costo_exalumno , t.costo_trabajador ,t.costo_externo');
         $this->db->join('talleres AS t' , 'ts.taller_id = t.id');
         $this->db->join('profesores AS p' , 'ts.profesor_id = p.id');
         $this->db->join('salones AS sa' , 'ts.salon_id = sa.id');
@@ -54,7 +54,7 @@ class Talleres_semestre_model extends CI_Model {
         return ($this->db->update('taller_semestre' , $data)) ? true : false;
     }
     public function get_with_name($id){
-        $this->db->select('ts.id,ts.cupo,ts.grupo,t.taller,t.id as taller_id,s.salon, s.id as salon_id,p.id as profesor_id,p.paterno,p.nombre,p.materno,sm.ini_sem,sm.fin_sem,sm.semestre');
+        $this->db->select('ts.id,ts.cupo,ts.grupo,t.taller,t.edad_minima,t.id as taller_id,s.salon, s.id as salon_id,p.id as profesor_id,p.paterno,p.nombre,p.materno,sm.ini_sem,sm.fin_sem,sm.semestre');
         $this->db->join('talleres AS t' , 'ts.taller_id = t.id');
         $this->db->join('profesores AS p' , 'ts.profesor_id = p.id');
         $this->db->join('salones AS s' , 'ts.salon_id = s.id');

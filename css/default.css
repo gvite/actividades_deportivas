@@ -225,3 +225,6 @@ body,html{
 .panel-talleres-cambio{
     cursor: pointer;
 }
+.talleres-class .thumbnail h3{
+    font-size: 14px;
+}

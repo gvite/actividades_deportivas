@@ -1,6 +1,6 @@
 $(document).on('ready', function() {
     countDownInsc();
-    $('.panel-talleres .btn-link').on('click' , function(event){
+    $('.talleres-class .btn-link').on('click' , function(event){
         event.preventDefault();
         $.ajax({
             url: $(this).attr('href'),
@@ -35,7 +35,6 @@ $(document).on('ready', function() {
         $('#requisitos_inscripcion .alert').height(mayorAltura + 40);
     });
 });
-$(document)
 function logout_events() {
     $('#logout_link').on('click', function(event) {
         event.preventDefault();

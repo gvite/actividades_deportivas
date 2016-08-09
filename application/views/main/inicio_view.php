@@ -8,7 +8,7 @@ if ($tiempo !== false) {
         <div id="counter" data-time="<?php echo $tiempo ?>"></div>
     </div>
 <?php } ?>
-<div class="row">
+<div class="row talleres-class">
 <!--    <div class="col-md-12">
         <h3>Candidatos a inscribirse al Taller de Piano:</h3>
         <p>Inmediatamente después de haber obtenido el voucher que genera el sistema, favor de presentarlo en el Departamento de Actividades Culturales, como parte indispensable de su procedimiento de inscripción. Las inscripciones que no atiendan a este requerimiento serán canceladas.</p>
@@ -25,10 +25,12 @@ if ($tiempo !== false) {
                     }
                     ?>
                     <div class="col-md-3">
-                        <div class="panel panel-info panel-talleres">
-                            <div class="panel-heading" style="background-image: url(images/talleres/<?php echo $taller['id'] . '_image' ?>.jpg)"><h3 style="background-image: url(images/titulo_trasnparencia.png)"><?php echo $taller['taller'] ?></h3></div>
-                            <div class="panel-body">
-                                <a href="admin/talleres/get_info/<?php echo $taller['id'] ?>" class="btn btn-link">M&aacute;s informaci&oacute;n..</a>
+                        <div class="thumbnail">
+                            <img src="<?php echo base_url();?>images/talleres/<?php echo $taller['id'] . '_image' ?>.jpg" />
+                            <div class="caption">
+                                <h3><?php echo $taller['taller'] ?></h3>
+                                <p><?php echo $taller['informacion'] ?></p>
+                                <p><a href="admin/talleres/get_info/<?php echo $taller['id'] ?>" class="btn btn-link">M&aacute;s informaci&oacute;n..</a></p>
                             </div>
                         </div>
                     </div>

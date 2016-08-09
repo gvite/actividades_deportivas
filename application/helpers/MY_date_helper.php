@@ -38,4 +38,13 @@ if (!function_exists('date_time_to_date')) {
     }
 
 }
+if (!function_exists('get_years_users')) {
+    function get_years_users($date) {
+        $d1 = new DateTime($date);
+        $d2 = new DateTime('now');
+        $diff = $d2->diff($d1);
+        $years = $diff->y;
+        return $years;
+    }
+}
 ?>

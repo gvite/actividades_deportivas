@@ -7,8 +7,7 @@ if (!defined('BASEPATH'))
     <h4>FES - ARAGON</h4>
 </div>
 <div>
-    <h4>UNIDAD DE EXTENSION UNIVERSITARIA</h4>
-    <h4>DEPARTAMENTO DE ACTIVIDADES CULTURALES</h4><br /><br />
+    <h4>DEPARTAMENTO DE ACTIVIDADES DEPORTIVAS</h4><br /><br />
     <h4><?php $usuario['nombre'] . ' ' . $usuario['paterno'] . ' ' . $usuario['materno']; ?></h4>
 </div>
 <div>
@@ -20,4 +19,3 @@ if (!defined('BASEPATH'))
     <span><?php echo $contra ?></span>
 </div>
 <strong>*Recuerda que ya tenemos la opci&oacute;n de cambiar la contrase&ntilde;a</strong>
-<img src="http://ingenieria.aragon.unam.mx/actividades_culturales/images/save_pass.jpg"/>

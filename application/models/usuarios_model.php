@@ -11,7 +11,7 @@ class Usuarios_model extends CI_Model {
     }
 
     function valida($nickname, $pass) {
-        $this->db->select('u.id,tu.tipo,u.nombre,tu.id as type_user');
+        $this->db->select('u.id,tu.tipo,u.nombre,tu.id as type_user, u.nacimiento');
         $this->db->join('tipo_usuario as tu', 'tu.id=u.tipo_usuario_id');
         $this->db->where('u.nickname', $nickname);
         $this->db->where('u.pass', $pass);

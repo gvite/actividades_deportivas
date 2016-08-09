@@ -44,7 +44,7 @@ class Talleres_model extends CI_Model {
     }
 
     public function get_all_by_semestre($semestre_id) {
-        $this->db->select('t.id,t.taller');
+        $this->db->select('t.id,t.taller,t.informacion');
         $this->db->join('taller_semestre as ts', 'ts.taller_id=t.id');
         $this->db->where('ts.semestre_id', $semestre_id);
         $this->db->where('t.status', 1);

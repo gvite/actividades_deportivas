@@ -35,6 +35,7 @@ class Registro extends CI_Controller {
         $this->form_validation->set_rules("correo_user", "E-Mail", "xss|required|valid_email|callback_valida_email");
         $this->form_validation->set_rules("nacimiento_user", "Fecha de Nacimiento", "xss|required|callback_valida_fecha");
         $this->form_validation->set_rules("type_user", "Tipo de usuario", "xss|required|is_natural_no_zero");
+        $this->form_validation->set_rules("sexo_user", "Sexo de usuario", "xss|required");
         $this->form_validation->set_message("required", "Introduce %s");
         $this->form_validation->set_message("valid_email", "Introduce un correo v&aacute;lido");
         $this->form_validation->set_message("is_natural_no_zero", "Introduce un tipo de usuario v&aacute;lido");
@@ -66,7 +67,8 @@ class Registro extends CI_Controller {
                 'pass' => $this->input->post('pass'),
                 'email' => $this->input->post('correo_user'),
                 'nacimiento' => exchange_date($this->input->post('nacimiento_user')),
-                'telefono' => $this->input->user("telefono_user"),
+                'telefono' => $this->input->post("telefono_user"),
+                'sexo' => $this->input->post("sexo_user"),
                 'status' => 1,
                 'tipo_usuario_id' => $tipo
             );
@@ -91,7 +93,6 @@ class Registro extends CI_Controller {
                     $id_datos = $this->datos_trabajador_model->insert($data2);
                 } else if ($tipo == 5) {
                     $data2['direccion'] = $this->input->post('direccion');
-                    $data2['telefono'] = $this->input->post('telefono');
                     $data2['ocupacion_id'] = $this->input->post('ocupacion');
                     $this->load->model('datos_externo_model');
                     $id_datos = $this->datos_externo_model->insert($data2);
@@ -101,6 +102,7 @@ class Registro extends CI_Controller {
                     $this->load->model('tipo_usuario_model');
                     $type = $this->tipo_usuario_model->get($data['tipo_usuario_id']);
                     set_user($data['nickname']);
+                    set_date($data["nacimiento"]);
                     if($type !== false){
                         set_type($type['tipo']);
                         set_type_user($type['id']);

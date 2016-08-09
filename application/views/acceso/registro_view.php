@@ -60,6 +60,19 @@ if (!defined('BASEPATH'))
                 </div>
             </div>
             <div class="control-group">
+                <label class="control-label">*Sexo</label>
+                <div class="controls">
+                    <div class="input-group" id="sexo_user">
+                        <label class="radio-inline" for="masculino_user">
+                            <input type="radio" name="sexo_user" id="masculino_user" value="1"> Hombre
+                        </label>
+                        <label class="radio-inline" for="femenino_user">
+                            <input type="radio" name="sexo_user" id="femenino_user" value="2"> Mujer
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="control-group">
                 <label class="control-label" for="telefono_user">Teléfono</label>
                 <div class="controls">
                     <input type="text" name="telefono_user" id="telefono_user" placeholder="telefono" class="input-xlarge form-control" />
@@ -133,12 +146,6 @@ if (!defined('BASEPATH'))
                     <label class="control-label" for="direccion">*Direcci&oacute;n</label>
                     <div class="controls">
                         <input type="text" id="direccion" name="direccion" placeholder="Direcci&oacute;n" class="input-xxlarge form-control" />
-                    </div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label" for="telefono">*Tel&eacute;fono</label>
-                    <div class="controls">
-                        <input type="text" id="telefono" name="telefono" value="" class="form-control" />
                     </div>
                 </div>
                 <div class="control-group">

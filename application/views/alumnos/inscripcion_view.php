@@ -15,7 +15,7 @@ if (!defined('BASEPATH'))
                         if (($taller['status'] === false || $taller['status']['status'] == 3)) {
                             ?>
                             <div class="panel panel-<?php
-                            if ($taller['percent'] < 100 && $taller['num_trabajador'] < 2 && $taller['puede_mas']) {
+                            if ($taller['percent'] < 100 && $taller['puede_mas'] === true) {
                                 echo 'default dragg-taller-div';
                             } else {
                                 echo 'danger alert-agotado';
@@ -69,20 +69,24 @@ if (!defined('BASEPATH'))
                                         </span>
                                     </div>
                                     <?php
-                                    if ($taller['num_trabajador'] >= 2) {
-                                        ?>
-                                        <span class="label label-warning">* No puede haber mas de 2 trabajadores</span>
-                                        <?php
-                                    }
-                                    if (!$taller['puede_mas']) {
-                                        ?>
-                                        <span class="label label-warning">* Ya inscribiste esta actividad <br /> en caso de que no hayas completado la inscripci&oacute;n <br /> a tiempo se aplica una penalizaci&oacute;n de un dia <br /> a partir de la fecha de expiraci&oacute;n</span>
-                                        <?php
+                                    if ($taller['puede_mas'] !== true) {
+                                        switch($taller['puede_mas']){
+                                            case 1:
+                                                ?>
+                                                <span class="label label-warning">* No alcanzas el mínimo de edad (<?php echo $taller["edad_minima"]; ?> años) <br />para inscribir esta actividad.</span>
+                                                <?php
+                                                break;
+                                            case 2: 
+                                                ?>
+                                                <span class="label label-warning">* Ya inscribiste esta actividad <br /> en caso de que no hayas completado la inscripci&oacute;n <br /> a tiempo se aplica una penalizaci&oacute;n de un dia <br /> a partir de la fecha de expiraci&oacute;n</span>
+                                                <?php
+                                                break;
+                                        }
                                     }
                                     ?>
                                 </div>
                                 <div class="panel-footer">
-                                    <?php if ($taller['percent'] < 100 && $taller['num_trabajador'] < 2 && $taller['puede_mas']) { ?>
+                                    <?php if ($taller['percent'] < 100 && $taller['puede_mas'] === true) { ?>
                                         <button type="button" class="btn btn-link pull-right btn-taller-insc"><span class="glyphicon glyphicon-circle-arrow-right"></span></button>
                                     <?php } ?>
                                     <div class="costo-taller">Aportaci&oacute;n voluntaria: $<span class="costo-span"><?php echo $taller['costo'] ?></span></div>

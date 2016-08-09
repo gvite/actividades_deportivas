@@ -17,12 +17,6 @@ if (!defined('BASEPATH'))
                 <div>Plantel: <?php echo $usuario['data_user']['facultad']; ?></div>
                 <div>Carrera: <?php echo $usuario['data_user']['carrera']; ?></div>
                 <div>No. Cuenta: <?php echo $usuario['data_user']['no_cuenta']; ?></div>
-                <div>Tel&eacute;fono: <?php echo $usuario['telefono']; ?></div>
-                <div>Email: <?php echo $usuario['email']; ?></div>
-                <div>Categor&iacute;a: </div>
-                <div>Rama: </div>
-                <div>Folio: <?php echo str_pad($baucher['folio'], 11, "0", STR_PAD_LEFT); ?></div>
-                <div>Fecha Expedici&oacute;n: <?php echo exchange_date_time($baucher['fecha_expedicion']) ?></div>
                 <?php
                 break;
             case 4:
@@ -32,29 +26,21 @@ if (!defined('BASEPATH'))
                 <div>No. Trabajador: <?php echo $usuario['data_user']['no_cuenta']; ?></div>
                 <div>Turno: <?php echo $usuario['data_user']['turno']; ?></div>
                 <div>Area: <?php echo $usuario['data_user']['area']; ?></div>
-                <div>Tel&eacute;fono: <?php echo $usuario['telefono']; ?></div>
-                <div>Email: <?php echo $usuario['email']; ?></div>
-                <div>Categor&iacute;a: </div>
-                <div>Rama: </div>
-                <div>Folio: <?php echo str_pad($baucher['folio'], 11, "0", STR_PAD_LEFT); ?></div>
-                <div>Fecha Expedici&oacute;n: <?php echo exchange_date_time($baucher['fecha_expedicion']) ?></div>
                 <?php
                 break;
             case 5:
                 ?>
                 <div>P&Uacute;BLICO EN GENERAL</div><br />
                 <div>Nombre: <?php echo $usuario['paterno'] . ' ' . $usuario['materno'] . ' ' . $usuario['nombre'] ?></div>
-                <div>Tel&eacute;fono: <?php echo $usuario['telefono']; ?></div>
-                <div>Email: <?php echo $usuario['email']; ?></div>
                 <div>Direcci&oacute;n: <?php echo $usuario['data_user']['direccion']; ?></div>
-                <div>Categor&iacute;a: </div>
-                <div>Rama: </div>
-                <div>Folio: <?php echo str_pad($baucher['folio'], 11, "0", STR_PAD_LEFT); ?></div>
-                <div>Fecha Expedici&oacute;n: <?php echo exchange_date_time($baucher['fecha_expedicion']) ?></div>
                 <?php
                 break;
         }
         ?>
+        <div>Tel&eacute;fono: <?php echo $usuario['telefono']; ?></div>
+        <div>Email: <?php echo $usuario['email']; ?></div>
+        <div>Categor&iacute;a: <?php echo ($usuario["edad"] >= 17 && $usuario["edad"] <= 45 )? "Libre": (($usuario["edad"] >= 46) ? "Master" : "")?></div>
+        <div>Rama: <?php echo ($usuario["sexo"] == 1) ? "Varonil" : "Femenil";?></div>
     </div>
 </div>
 <br /><br />
@@ -84,7 +70,7 @@ if (!defined('BASEPATH'))
 <div class="paquete">
     <h3>RECIB&Iacute; PAQUETE COMPLETO QUE INCLUYE </h3>
     <ul>
-        <li>Payera: </li>
+        <li>Playera: </li>
         <li>N&uacute;mero: </li>
         <li>Chip de corredor: </li>
     </ul>

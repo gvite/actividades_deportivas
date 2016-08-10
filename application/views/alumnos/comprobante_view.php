@@ -23,8 +23,8 @@ if (!defined('BASEPATH'))
                 ?>
                 <div>COMUNIDAD UNAM</div><br />
                 <div>Nombre: <?php echo $usuario['paterno'] . ' ' . $usuario['materno'] . ' ' . $usuario['nombre'] ?></div>
-                <div>No. Trabajador: <?php echo $usuario['data_user']['no_cuenta']; ?></div>
-                <div>Turno: <?php echo $usuario['data_user']['turno']; ?></div>
+                <div>No. Trabajador: <?php echo $usuario['data_user']['no_trabajador']; ?></div>
+                <div>Turno: <?php echo ($usuario['data_user']['turno'] == 0) ? "Matutino" : "Vespertino"; ?></div>
                 <div>Area: <?php echo $usuario['data_user']['area']; ?></div>
                 <?php
                 break;

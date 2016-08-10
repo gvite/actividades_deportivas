@@ -21,7 +21,7 @@ if (!defined('BASEPATH'))
     </div>
     <div class="row">
         <div class="col-md-12">
-            <h4>Informacion</h4>
+            <h4>Informaci&oacute;n</h4>
             <p><?php echo $taller['informacion'] ?></p>
         </div>
     </div>
@@ -30,7 +30,7 @@ if (!defined('BASEPATH'))
             <table class="table">
                 <thead>
                     <tr>
-                        <th colspan="4">Aportaci&oacute;n voluntaria</th>
+                        <th colspan="4">Aportaci&oacute;n</th>
                     </tr>
                     <tr>
                         <th>Alumno</th>

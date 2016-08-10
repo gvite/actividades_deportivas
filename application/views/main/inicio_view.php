@@ -54,87 +54,53 @@ if ($tiempo !== false) {
         ?>
     </div>
 </div>
-<?php
-if (get_type_user() != 1 && $talleres !== false) {
-    ?>
-    <div class="row">
-        <div class="col-md-12">
-            <strong>Requisitos para terminar inscripci&oacute;n:</strong>
-        </div>
-    </div>
     <div class="row" id="requisitos_inscripcion">
-        <?php
-        if (get_type_user() == 2 || get_type_user() === false) {
-            ?>
-            <div class="col-md-3">
-                <div class="alert alert-info">
-                    Alumnos
-                    <ul>
-                        <li>Original y Copia de credencial de alumno</li>
-                        <li>Presentar Original y copia del voucher generado para validar la inscripci&oacute;n en el Departamento de Actividades Culturales</li>
-                        <li>Ticket de caja en original y 2 copia</li>
-                        <li>Comprobante de inscripción al semestre 2016-2</li>
-                        <!--<li>2 Fotos tamaño infantil en blanco y negro o a color</li>
-                        <li>Copia de carnet (seguro social / seguro m&eacute;dico)</li>
-                        <li>Historial Acad&eacute;mico</li>-->
-                    </ul>
+            <div class="bs-callout bs-callout-primary">
+                <h4>Tramitar credencial deportiva</h4>
+                <div class="list-group">
+                    <div class="list-group-item">
+                        <h4>Escanear y enviar al e-mail <strong><a href="mailto:cadyr_fesara@outlook.com">cadyr_fesara@outlook.com</a></strong> los siguientes documentos:</h4>
+                        <ul>
+                            <li>Credencial UNAM o INE.</li>
+                            <li>Tira de materias o comprobante de inscripción del semestre en curso.</li>
+                            <li>1 fotografía tamaño infantil.</li>
+                            <li>Carnet de Seguridad Social IMSS.</li>
+                            <li>Pago en caja de $40.00  (Saldar en Caja)</li>
+                        </ul>
+                    </div>
+                    <div class="list-group-item">
+                        <h4>En asunto debes escribir tu nombre completo: apellido paterno, materno y nombre(s), y en el cuerpo del correo los siguientes datos:</h4>
+                        <ul>
+                            <li>Lugar y fecha de nacimiento.</li>
+                            <li>Tipo de sangre (Si no lo conoce especificar “Desconocido”)</li>
+                            <li>Alergias.</li>
+                            <li>En caso de emergencia avisar a: Nombre de algún familiar y su número telefónico (preferentemente móvil).</li>
+                        </ul>
+                    </div>
+                    <div class="list-group-item">
+                        <h4>Para la entrega de tu credencial debes presentar:</h4>
+                        <ul>
+                            <li>Identificación UNAM o INE</li>
+                            <li>Fotografía tamaño infantil reciente (en papel fotográfico, no enmicada, no sellada, no escaneada).</li>
+                            <li>Recibo de pago por $40.00</li>
+                        </ul>
+                    </div>
+                    <div class="list-group-item">
+                        <h4>La credencial deportiva se entregará  5 días hábiles después de haber enviado el correo.</h4>
+                    </div>
                 </div>
             </div>
-            <?php
-        }
-        if (get_type_user() == 4 || get_type_user() === false) {
-            ?>
-            <div class="col-md-3">
-                <div class="alert alert-info">
-                    Trabajadores
-                    <ul>
-                        <li>Original y Copia de credencial de trabajador</li>
-                        <li>Presentar Original y copia del voucher generado para validar la inscripci&oacute;n en el Departamento de Actividades Culturales</li>
-                        <li>Ticket de caja en original y 2 copia</li>
-                        <!--<li>2 Fotos tamaño infantil en blanco y negro o a color</li>
-                        <li>Copia de carnet (seguro social / seguro m&eacute;dico)</li>-->
-                    </ul>
-                </div>
+            <div class="bs-callout bs-callout-primary">
+                <h4>Renovación de credencial deportiva</h4>
+                <ul>
+                    <li>Credencial UNAM o INE.</li>
+                    <li>Registro de inscripción (tira de materias del semestre en curso).</li>
+                    <li>Pago en caja de $40.00</li>
+                    <li>1 fotografía tamaño infantil.</li>
+                    <li>Credencial Deportiva 2016-II</li>
+                </ul>
             </div>
-            <?php
-        }
-        if (get_type_user() == 3 || get_type_user() === false) {
-            ?>
-            <div class="col-md-3">
-                <div class="alert alert-info">
-                    Exalumnos
-                    <ul>
-                        <li>Original y Copia de credencial de ex-alumno o Identificaci&oacute;n oficial + Historial academico</li>
-                        <li>Presentar Original y copia del voucher generado para validar la inscripci&oacute;n en el Departamento de Actividades Culturales</li>
-                        <li>Ticket de caja en original y 2 copia</li>
-                        <!--<li>2 Fotos tamaño infantil en blanco y negro o a color</li>
-                        <li>Copia de carnet (seguro social / seguro m&eacute;dico)</li>-->
-                    </ul>
-                </div>
-            </div>
-            <?php
-        }
-        if (get_type_user() == 5 || get_type_user() === false) {
-            ?>
-            <div class="col-md-3">
-                <div class="alert alert-info">
-                    Externos
-                    <ul>
-                        <li>Original y copia de identificaci&oacute;n oficial.</li>
-                        <li>Presentar Original y copia del voucher generado para validar la inscripci&oacute;n en el Departamento de Actividades Culturales</li>
-                        <li>Ticket de caja en original y 2 copia</li>
-                        <!--<li>2 Fotos tamaño infantil en blanco y negro o a color</li>
-                        <li>Copia de carnet (seguro social / seguro m&eacute;dico)</li>-->
-                    </ul>
-                </div>
-            </div>
-            <?php
-        }
-        ?>
     </div>
-    <?php
-}
-?>
 <div class="row">
     <div class="modal fade active" id="informacion_modal" role="dialog">
         <div class="modal-dialog modal-lg">

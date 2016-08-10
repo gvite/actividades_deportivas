@@ -274,7 +274,7 @@ class Inscripcion extends CI_Controller {
             $css = $this->load->view('alumnos/comprobante_css', $data, true);
             $this->load->library('mpdf');
             $mpdf = new mPDF();
-            $header = '<img src="images/logo_pdf.jpg" style="margin-top:-30px;" /><img src="images/40_anios.jpg" style="margin-top:30px;float:right;" width="90px"/>';
+            $header = '<img src="images/logo_pdf.jpg" style="margin-top:30px;" width="110px" /><img src="images/40_anios.jpg" style="margin-top:30px;float:right;" width="90px"/>';
             $mpdf->SetProtection(array('copy' , 'print'));
             $mpdf->SetHTMLHeader($header);
             $mpdf->WriteHTML($css, 1);

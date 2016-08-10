@@ -17,7 +17,7 @@ $(document).on('ready', function() {
         });
     });
     var mayorAltura=0;
-    $('#requisitos_inscripcion .alert ul').each(function(){
+    $('#requisitos_inscripcion .alert').each(function(){
         var alturaVersiones = $(this).height();
         if(alturaVersiones > mayorAltura){
             mayorAltura = alturaVersiones;
@@ -26,7 +26,7 @@ $(document).on('ready', function() {
     $('#requisitos_inscripcion .alert').height(mayorAltura + 40);
     $( window ).resize(function() {
         var mayorAltura=0;
-        $('#requisitos_inscripcion .alert ul').each(function(){
+        $('#requisitos_inscripcion .alert').each(function(){
             var alturaVersiones = $(this).height();
             if(alturaVersiones > mayorAltura){
                 mayorAltura = alturaVersiones;

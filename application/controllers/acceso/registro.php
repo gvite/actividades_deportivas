@@ -51,7 +51,6 @@ class Registro extends CI_Controller {
             $this->form_validation->set_rules("area", "Area", "xss|required");
         } else if ($tipo == 5) {
             $this->form_validation->set_rules("direccion", "Direcci&oacute;n", "xss|required");
-            $this->form_validation->set_rules("telefono", "Tel&eacute;fono", "xss|required");
             $this->form_validation->set_rules("ocupacion", "Ocupaci&oacute;n", "xss|required");
         }
         if ($this->form_validation->run() === FALSE) {
